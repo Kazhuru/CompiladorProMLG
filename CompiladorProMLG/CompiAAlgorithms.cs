@@ -10,26 +10,27 @@ namespace CompiladorProMLG
     {
         /********/
         bool Error = false;
-        Dictionary<string, List<string>> DiccioAnalizador = new Dictionary<string, List<string>>();
-        Dictionary<string, List<string>> DiccioPrimeros = new Dictionary<string, List<string>>();
-        Dictionary<string, List<string>> DiccioSiguiente = new Dictionary<string, List<string>>();
-        Dictionary<string, List<string>> DiccioAux = new Dictionary<string, List<string>>();
+        public Dictionary<string, List<string>> DiccioAnalizador = new Dictionary<string, List<string>>();
+        public Dictionary<string, List<string>> DiccioPrimeros = new Dictionary<string, List<string>>();
+        public Dictionary<string, List<string>> DiccioSiguiente = new Dictionary<string, List<string>>();
+        public Dictionary<string, List<string>> DiccioAux = new Dictionary<string, List<string>>();
         /********/
-        List<List<string>> Aumentada = new List<List<string>>();
-        List<string> sg = new List<string>();
-        List<List<ElementoLr1>> C = new List<List<ElementoLr1>>();
-        Dictionary<string, Dictionary<int, int>> TablaDeEstados = new Dictionary<string, Dictionary<int, int>>();
+        public List<List<string>> Aumentada = new List<List<string>>();
+        public List<string> sg = new List<string>();
+        public List<List<ElementoLr1>> C = new List<List<ElementoLr1>>();
+        public Dictionary<string, Dictionary<int, int>> TablaDeEstados = new Dictionary<string, Dictionary<int, int>>();
         /*********/
-        string StrAnalisis;
-        Dictionary<int, Dictionary<string, string>> Accion = new Dictionary<int, Dictionary<string, string>>();Dictionary<string, List<string>> DiccioLR1 = new Dictionary<string, List<string>>();
+        public Dictionary<int, Dictionary<string, string>> Accion = new Dictionary<int, Dictionary<string, string>>();
+        public Dictionary<string, List<string>> DiccioLR1 = new Dictionary<string, List<string>>();
 
         public CompiAAlgorithms()
         {
             //TODO?
         }
 
-        private void UpdateAnalizador(string input)
+        public void UpdateAnalizador(string input)
         {
+            DiccioAnalizador.Clear();
             bool antesFlecha;
             string[] divInput = input.Split('\n');
             Error = false;
@@ -123,9 +124,10 @@ namespace CompiladorProMLG
             DiccioAnalizador["Error "].Add(texto);
         }
 
-        private void UpdatePrimero()
+        public void UpdatePrimero()
         {
             DiccioPrimeros.Clear();
+            DiccioAux.Clear();
             /*Generar Primero*/
             if (!Error && DiccioAnalizador.Count > 0)
                 foreach (string itK in DiccioAnalizador.Keys.ToList())
@@ -232,7 +234,7 @@ namespace CompiladorProMLG
             return result;
         }
 
-        private void UpdateSiguiente()
+        public void UpdateSiguiente()
         {
             DiccioSiguiente.Clear();
             DiccioAux.Clear();
@@ -461,7 +463,7 @@ namespace CompiladorProMLG
             return isDifferent;
         }
 
-        private bool GeneraTablaLR1()
+        public bool GeneraTablaLR1()
         {
             bool Lr1Error = false;
             List<string> Ir_A = new List<string>();
@@ -540,7 +542,7 @@ namespace CompiladorProMLG
             return Lr1Error;
         }
 
-        private void UpdateAaslr(Dictionary<int, Dictionary<string, string>> Accion, string StrAnalisis)
+        public void UpdateAaslr(Dictionary<int, Dictionary<string, string>> Accion, string StrAnalisis)
         {
             Stack<int> EdosStack = new Stack<int>();
 
@@ -626,7 +628,7 @@ namespace CompiladorProMLG
             }
         }
 
-        private void TransformToLALR()
+        public void TransformToLALR()
         {
             List<List<int>> testResul = new List<List<int>>();
             List<List<ElementoLr1>> AuxC = new List<List<ElementoLr1>>(C);
